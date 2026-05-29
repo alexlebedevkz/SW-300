@@ -35,6 +35,12 @@
     accurateTrackBounce: true,
     webvisor: true
   });
+  // Цель: клик по любой ссылке перехода в Kaspi (kaspi.html)
+  document.addEventListener("click", function (e) {
+    if (e.target.closest && e.target.closest('a[href*="kaspi.html"]')) {
+      ym(109469156, "reachGoal", "kaspi_click");
+    }
+  }, true);
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/109469156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
