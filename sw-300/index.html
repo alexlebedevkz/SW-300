@@ -20,6 +20,11 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-6JNYXYENB7');
+  document.addEventListener("click", function (e) {
+    if (e.target.closest && e.target.closest('a[href*="kaspi.html"]')) {
+      gtag('event', 'kaspi_click', { event_category: 'conversion' });
+    }
+  }, true);
 </script>
 
 <!-- Яндекс Метрика -->
@@ -1128,7 +1133,7 @@
             Дополнительный фильтр
           </div>
         </div>
-        <img class="hero-img" src="https://resources.cdn-kaspi.kz/img/m/p/p1d/pf2/143517562.png?format=gallery-large" alt="SWANERO SW-300 фиолетовый" loading="eager" fetchpriority="high" width="460" height="460" />
+        <img class="hero-img" src="https://resources.cdn-kaspi.kz/img/m/p/p1d/pf2/143517562.png?format=gallery-large" alt="SWANERO SW-300 фиолетовый" loading="eager" fetchpriority="high" width="460" />
       </div>
 
     </div>
