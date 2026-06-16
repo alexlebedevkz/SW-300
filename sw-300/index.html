@@ -1516,36 +1516,22 @@
 
 
 <script>
-// Countdown timer — до конца недели, при сбросе → 72 часа
+// Countdown timer — до конца текущего дня (23:59:59)
 (function () {
   function getEnd() {
-    var stored = localStorage.getItem('sw300_end');
-    if (stored) {
-      var ts = parseInt(stored, 10);
-      if (ts > Date.now()) return ts;
-    }
     var d = new Date();
-    var daysLeft = (7 - d.getDay()) % 7 || 7;
-    d.setDate(d.getDate() + daysLeft);
     d.setHours(23, 59, 59, 0);
-    var end = d.getTime();
-    localStorage.setItem('sw300_end', end);
-    return end;
+    return d.getTime();
   }
 
-  var end = getEnd();
   var hEl = document.getElementById('timer-h');
   var mEl = document.getElementById('timer-m');
   var sEl = document.getElementById('timer-s');
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
   function tick() {
-    var diff = end - Date.now();
-    if (diff <= 0) {
-      end = Date.now() + 72 * 3600 * 1000;
-      localStorage.setItem('sw300_end', end);
-      diff = end - Date.now();
-    }
+    var diff = getEnd() - Date.now();
+    if (diff < 0) diff = 0;
     var h = Math.floor(diff / 3600000);
     var m = Math.floor((diff % 3600000) / 60000);
     var s = Math.floor((diff % 60000) / 1000);
