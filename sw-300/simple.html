@@ -13,11 +13,6 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-6JNYXYENB7');
-    document.addEventListener("click", function (e) {
-      if (e.target.closest && e.target.closest('a[href*="kaspi.html"]')) {
-        gtag('event', 'kaspi_click', { event_category: 'conversion' });
-      }
-    }, true);
   </script>
 
   <!-- Яндекс Метрика -->
@@ -33,11 +28,6 @@
       accurateTrackBounce: true,
       webvisor: true
     });
-    document.addEventListener("click", function (e) {
-      if (e.target.closest && e.target.closest('a[href*="kaspi.html"]')) {
-        ym(109469156, "reachGoal", "kaspi_click");
-      }
-    }, true);
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109469156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
@@ -53,14 +43,24 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '953309654252008');
     fbq('track', 'PageView');
-    document.addEventListener("click", function (e) {
-      if (e.target.closest && e.target.closest('a[href*="kaspi.html"]')) {
-        fbq('track', 'Lead');
-      }
-    }, true);
   </script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=953309654252008&ev=PageView&noscript=1"/></noscript>
+
+  <!-- Единый обработчик конверсии: срабатывает только один раз за сессию -->
+  <script>
+    (function () {
+      var sent = false;
+      document.addEventListener("click", function (e) {
+        if (!sent && e.target.closest && e.target.closest('a[href*="kaspi.html"]')) {
+          sent = true;
+          gtag('event', 'kaspi_click', { event_category: 'conversion' });
+          ym(109469156, "reachGoal", "kaspi_click");
+          fbq('track', 'Lead');
+        }
+      }, true);
+    })();
+  </script>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
